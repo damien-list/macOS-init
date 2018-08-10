@@ -28,37 +28,33 @@ echo 'export PATH="/usr/local/sbin:$PATH"' >> ~/.zshrc
 # Mettre à jour la liste des applications disponibles
 brew update
 
+# Installer Dropbox au plus tôt pour lancer la synchro des settings
+brew cask install dropbox
+echo "Ouverture de Dropbox pour commencer la synchronisation"
+open -a Dropbox
+
 # Installer les nouvelles applications du bundle Brewfile
 # et mettre à jour celles déjà présentes
 brew bundle
 
-echo "Ouverture de Dropbox pour commencer la synchronisation"
-open -a Dropbox
+#echo "Finalisation de l'installation de The Fuck avec l'alias \"whoops\""
+#echo 'eval "$(thefuck --alias whoops)"' >> ~/.zshrc
 
-# installation en spécifique de TigerVPN
-if [ ! -e "/Applications/tigerVPN.app" ]; then
-  echo "Installation de tigerVPN"
-  curl -s -L -o $HOME/Downloads/tigerVPN.dmg "https://apps-tigervpn.netdna-ssl.com/mac/tigerVPN_1_1.dmg"
-  hdiutil attach -quiet $HOME/Downloads/tigerVPN.dmg
-  ditto -rsrc "/Volumes/tigerVPN/tigerVPN.app" /Applications/tigerVPN.app
-  hdiutil detach "/Volumes/tigerVPN"
-  rm -f $HOME/Downloads/tigerVPN.dmg
-fi
-
-echo "Finalisation de l'installation de The Fuck avec l'alias \"whoops\""
-echo 'eval "$(thefuck --alias whoops)"' >> ~/.zshrc
-
-echo "Installation des outils de développement Ruby"
+#echo "Installation des outils de développement Ruby"
 # Mise à jour de RubyGems
-sudo gem update --system --silent
+#sudo gem update --system --silent
 # Installation de Bundler
-sudo gem install bundler
+#sudo gem install bundler
 
 echo "Installation des outils de développement Node"
 # Installation de composants Node
 npm install -g npm-check-updates
-npm install grunt -g
-npm install grunt-cli -g
+npm install -g grunt
+npm install -g grunt-cli
+
+echo "Installation d'applications en Node"
+# De meilleures aides en ligne : http://tldr.sh/
+npm install -g tldr
 
 echo "Finalisation de l'installation de PHP"
 echo 'export PATH="$(brew --prefix homebrew/php/php71)/bin:$PATH"' >> ~/.zshrc
@@ -81,10 +77,10 @@ defaults write com.apple.finder ShowStatusBar -bool true
 # Nlsv ▸ List View
 # clmv ▸ Column View
 # icnv ▸ Icon View
-defaults write com.apple.finder FXPreferredViewStyle -string “clmv”
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
 # Ne pas afficher le chemin d'accès
-defaults write com.apple.finder ShowPathbar -bool false
+defaults write com.apple.finder ShowPathbar -bool true
 
 # Affichage de toutes les extensions
 sudo defaults write NSGlobalDomain AppleShowAllExtensions -bool true
@@ -136,8 +132,8 @@ defaults write com.apple.dock largesize -float 128
 defaults write com.apple.dock mru-spaces -bool false
 
 # Mot de passe demandé immédiatement quand l'économiseur d'écran s'active
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
+#defaults write com.apple.screensaver askForPassword -int 1
+#defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 ## COINS ACTIFS
 
@@ -157,8 +153,8 @@ defaults write com.apple.screensaver askForPasswordDelay -int 0
 # defaults write com.apple.dock wvous-tl-modifier -int 0
 
 # En haut à droite : screensaver
-defaults write com.apple.dock wvous-tr-corner -int 5
-defaults write com.apple.dock wvous-tr-modifier -int 0
+#defaults write com.apple.dock wvous-tr-corner -int 5
+#defaults write com.apple.dock wvous-tr-modifier -int 0
 
 # En bas à gauche : fenêtres de l'application
 # defaults write com.apple.dock wvous-bl-corner -int 3
@@ -216,7 +212,7 @@ defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 sudo nvram SystemAudioVolume="%00"
 
 # Alertes sonores quand on modifie le volume
-sudo defaults write com.apple.systemsound com.apple.sound.beep.volume -float 1
+#sudo defaults write com.apple.systemsound com.apple.sound.beep.volume -float 1
 
 ## IMAGES
 
