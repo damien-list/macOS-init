@@ -37,6 +37,9 @@ open -a Dropbox
 # et mettre à jour celles déjà présentes
 brew bundle
 
+echo "Ajout du PATH MySQL"
+echo 'export PATH="/usr/local/opt/mysql@5.5/bin:$PATH"' >> ~/.zshrc
+
 #echo "Finalisation de l'installation de The Fuck avec l'alias \"whoops\""
 #echo 'eval "$(thefuck --alias whoops)"' >> ~/.zshrc
 
@@ -57,9 +60,9 @@ echo "Installation d'applications en Node"
 npm install -g tldr
 
 echo "Finalisation de l'installation de PHP"
-echo 'export PATH="$(brew --prefix homebrew/php/php71)/bin:$PATH"' >> ~/.zshrc
-brew services start homebrew/php/php71
-brew services start homebrew/apache/httpd24
+echo 'export PATH="$(brew --prefix homebrew/php/php71)/bin:$PATH"' >> 	
+#brew services start php7
+brew services start httpd
 
 ## ************************* CONFIGURATION ********************************
 echo "Configuration de quelques paramètres par défaut"
@@ -71,6 +74,9 @@ echo "Configuration de quelques paramètres par défaut"
 
 # Affichage de la barre latérale
 defaults write com.apple.finder ShowStatusBar -bool true
+
+# Affichage des fichiers commençant par un point
+defaults write com.apple.finder AppleShowAllFiles YES
 
 # Afficher par défaut en mode colonne
 # Flwv ▸ Cover Flow View
@@ -170,16 +176,17 @@ defaults write com.apple.dock mru-spaces -bool false
 sudo defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 # Arrêt pop-up clavier façon iOS
-sudo defaults write -g ApplePressAndHoldEnabled -bool false
+#sudo defaults write -g ApplePressAndHoldEnabled -bool false
 
 # Répétition touches plus rapide
-sudo defaults write NSGlobalDomain KeyRepeat -int 1
+#sudo defaults write NSGlobalDomain KeyRepeat -int 1
 # Délai avant répétition des touches
-sudo defaults write NSGlobalDomain InitialKeyRepeat -int 10
+#sudo defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
 # Trackpad : toucher pour cliquer
-sudo defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-sudo defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+# DOES NOT WORK ANYMORE IN SIERRA (And later ?)
+#sudo defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+#sudo defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
 ## APPS
 
@@ -234,4 +241,5 @@ rm -f -r /Library/Caches/Homebrew/*
 
 echo ""
 echo "ET VOILÀ !"
+echo "Il faut dorénavant régler dans préférences pour le toucher avec le trackpad, pour la sélection de texte en touchant, et la possibilité d’utiliser la tabulation dans les modales."
 echo "Après synchronisation des données Dropbox (seuls les dossiers « Mackup » et « Settings » sont nécessaires dans un premier temps), lancer le script post-cloud.sh"

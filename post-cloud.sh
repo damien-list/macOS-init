@@ -8,7 +8,7 @@ echo "Restauration des préférences"
 # echo -e "[storage]\nengine = google_drive" >> ~/.mackup.cfg
 
 # Récupération de la sauvegarde sans demander à chaque fois l'autorisation
-mackup restore -n
+mackup restore -f
 
 # Enregistrement des copies d'écran sur Dropbox
 defaults write com.apple.screencapture location -string “$HOME/Dropbox/Captures/MB12”
@@ -16,7 +16,23 @@ defaults write com.apple.screencapture location -string “$HOME/Dropbox/Capture
 echo "Configuration de unbound"
 sudo mv /usr/local/etc/unbound/unbound.conf /usr/local/etc/unbound/unbound.conf.bak
 sudo cp -r ~/Dropbox/conf_macbook/unbound/ /usr/local/etc/unbound/
+
+#Doing following commands to add the user unbound missing with brew installation
+sudo dscl . -create /Groups/_unbound
+sudo dscl . -create /Groups/_unbound PrimaryGroupID 451
+sudo dscl . -create /Users/_unbound
+sudo dscl . -create /Users/_unbound RecordName _unbound unbound
+sudo dscl . -create /Users/_unbound RealName "Unbound DNS server"
+sudo dscl . -create /Users/_unbound UniqueID 451
+sudo dscl . -create /Users/_unbound PrimaryGroupID 451
+sudo dscl . -create /Users/_unbound UserShell /usr/bin/false
+sudo dscl . -create /Users/_unbound Password '*'
+sudo dscl . -create /Groups/_unbound GroupMembership _unbound
+
 sudo brew services restart unbound
+
+#SET DNS SERVER
+sudo networksetup -setdnsservers Wi-Fi 172.16.72.180 127.0.0.1
 
 echo "Configuration de apache"
 sudo rm -f /etc/apache2/httpd.conf
@@ -92,6 +108,14 @@ pecl install xdebug
 sphp 7.2
 pecl uninstall -r xdebug
 pecl install xdebug
+
+#Installation de memcached
+#git clone -b NON_BLOCKING_IO_php7 https://github.com/websupport-sk/pecl-memcache.git
+#cd pecl-memcache
+#phpize
+#./configure
+#make && make install
+#Dans fichier php.ini ajouter l'extension, par ex: dans /usr/local/etc/php/7.0/php.ini ajouter extension="/Users/damien/Downloads/pecl-memcache/modules/memcache.so"
 
 echo "Installation de oh-my-zsh"
 # Installation de oh-my-zsh

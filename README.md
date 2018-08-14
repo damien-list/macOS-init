@@ -32,3 +32,15 @@ Voici comment utiliser les deux scripts :
 - quand le premier script est terminé, et quand vos données sont synchronisées depuis le cloud, ouvrez le fichier `post-cloud.sh` :
   - [ligne 8](https://github.com/nhoizey/macOS-init/blob/master/post-cloud.sh#L8), modifiez cette ligne en fonction du service de Cloud choisi, ou laissez-la en commentaire si vous utilisez Dropbox (choix par défaut) ;
 - toujours dans le Terminal, glissez le fichier `post-cloud.sh` avant de valider avec la touche entrée pour finir l'installation.
+
+## NOTE POUR DAMIEN
+
+Pour finir, il faut : 
+
+- sync hosts file
+- change Listen 8080 to Listen 80 and add Listen 443
+- change DocumentRoot
+- change index by default
+- Activer les modules PHP et host
+- Include vhosts
+- SSL part, see https://getgrav.org/blog/macos-sierra-apache-ssl
