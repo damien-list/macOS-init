@@ -97,6 +97,7 @@ brew 'php@5.6'
 brew 'php@7.0'
 brew 'php@7.1'
 brew 'php@7.2'
+brew 'php-cs-fixer'
 brew 'pkg-config'
 #brew 'ruby'
 #cask 'duet' #transformer son iPad en 2e écran
