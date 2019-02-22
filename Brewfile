@@ -73,6 +73,7 @@ cask 'teamviewer'
 cask 'yubico-yubikey-piv-manager'
 brew 'lnav'
 brew 'gpg'
+brew 'gnu-sed'
 
 
 # Backup et synchro
