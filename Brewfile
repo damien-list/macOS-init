@@ -40,7 +40,7 @@ brew 'nmap'
 #brew 'thefuck'
 cask 'iterm2'
 brew 'zsh'
-brew ’zsh-syntax-highlighting’
+brew 'zsh-syntax-highlighting'
 
 # Améliorations d'interface et usage
 #cask 'bartender'
